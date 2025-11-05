@@ -1,66 +1,81 @@
-# 📊 Análise de Desempenho de Algoritmos de Ordenação em Python
+# 📊 Análise de Desempenho de Algoritmos de Ordenação
 
-Este projeto realiza uma análise comparativa da eficiência de diversos algoritmos de ordenação (Sorting Algorithms). O foco principal é medir o tempo de execução e, futuramente, outras métricas de desempenho (como comparações e trocas) em diferentes cenários de entrada, utilizando arrays de tamanhos variados.
+Este projeto implementa e analisa o desempenho de seis algoritmos de ordenação clássicos em Python, utilizando as bibliotecas `numpy` e `time`. O objetivo principal é medir e comparar a complexidade de tempo (tempo de execução) de cada algoritmo à medida que o tamanho da entrada (N) aumenta.
 
-## 🚀 Status Atual
-O projeto concluiu sua primeira fase de análise, focada em medir o tempo de execução para casos médios (aleatórios) e piores casos (invertidos).
+## 🚀 Algoritmos Analisados
 
-## 🧮 Algoritmos Implementados
-Atualmente, a análise compara os seguintes algoritmos implementados "do zero" (sem bibliotecas externas de ordenação):
+O notebook `arrays.ipynb` contém implementações "do zero" dos seguintes algoritmos:
 
 * Bubble Sort
 * Selection Sort
 * Insertion Sort
 * Shell Sort
-* Quick Sort (com estratégia de pivô próximo ou exatamente na metade do array)
-* Merge Sort
+* Quick Sort (recursivo)
+* Merge Sort (recursivo)
 
-## 📈 Análise Realizada (Fase 1)
+## 🔬 Metodologia de Análise
 
-Na primeira fase, a análise foi conduzida em séries de dados com os seguintes tamanhos: **1.000, 10.000, 20.000, 30.000, 40.000 e 50.000 elementos**.
+A análise de desempenho é conduzida da seguinte forma:
 
-Para cada tamanho, os seguintes cenários foram testados:
+1.  **Geração de Dados:** Para cada tamanho de array $N$, são gerados quatro conjuntos de dados:
+    * **3x Séries Aleatórias:** Arrays de números inteiros gerados aleatoriamente.
+    * **1x Pior Caso (Worst Case):** Um array com os mesmos elementos, mas ordenado em ordem decrescente (o pior caso para a maioria dos algoritmos de ordenação).
 
-### 1. Caso Médio (Listas Aleatórias)
-* **Geração:** Foram geradas 3 séries distintas de números inteiros aleatórios (sem repetição).
-* **Métrica:** Calculamos o tempo de execução para ordenar cada uma das 3 séries.
-* **Resultado:** Foi calculada a **média de tempo** desses três testes para estabelecer um benchmark de "caso médio" para cada algoritmo.
+2.  **Tamanhos de Entrada (N):**
+    * 1.000 (1k)
+    * 5.000 (5k) - *Nota: O notebook atual inclui 5k, embora a análise final possa focar nos outros.*
+    * 10.000 (10k)
+    * 20.000 (20k)
+    * 30.000 (30k)
+    * 40.000 (40k)
+    * 50.000 (50k)
 
-### 2. Pior Caso (Listas Invertidas)
-* **Geração:** Foi gerada 1 série de números inteiros totalmente invertida (ordenada de forma descendente).
-* **Métrica:** Medimos o tempo de execução para este cenário.
-* **Resultado:** Este teste avalia o comportamento dos algoritmos em seu "pior caso" teórico (especialmente relevante para o Bubble Sort e o Quicksort com pivô ingênuo).
+3.  **Coleta de Métricas:**
+    * O tempo de execução de cada algoritmo é medido para cada uma das quatro séries.
+    * A **Média de Tempo** é calculada a partir das três execuções com séries aleatórias.
+    * O **Tempo do Pior Caso** é registrado separadamente.
 
-## 📊 Resultados Provisórios
-Os resultados da Fase 1 foram consolidados em gráficos de **Tempo (s) vs. Tamanho do Array (N)**.
+4.  **Armazenamento:**
+    * Todos os tempos e médias são salvos em arquivos `.npy` (ex: `mean_arr_bs.npy`, `list_qs.npy`) para análise posterior e plotagem de gráficos.
 
-Esses gráficos comparam visualmente o desempenho do **caso médio aleatório** contra o **pior caso invertido** para cada um dos algoritmos implementados, destacando a diferença de complexidade $O(n^2)$, vs. $O(\log n)$ na prática.
+## ⚙️ Como Executar o Projeto
 
-## 🛠️ Tecnologias Utilizadas
-* **Python 3.12.7**
-* **Matplotlib** (para a plotagem dos gráficos)
-* **NumPy** (para geração eficiente de arrays)
-* **Módulo `time` ** (para medição precisa do tempo de execução)
+1.  **Pré-requisitos:**
+    * Python 3.x
+    * Jupyter Notebook ou Jupyter Lab
+    * Bibliotecas: `numpy`, `matplotlib`, `time` (a última é nativa do Python).
 
-## 🗺️ Próximos Passos (Roadmap)
+    ```bash
+    pip install numpy matplotlib jupyter
+    ```
 
-Para tornar a análise ainda mais robusta e completa, os próximos passos do projeto incluem:
+2.  **Executando os Testes:**
+    * Abra o notebook `arrays.ipynb` no Jupyter.
+    * Execute todas as células sequencialmente. Isso pode levar um tempo considerável, especialmente para os algoritmos $O(n^2)$ (Bubble, Selection, Insertion) em tamanhos de array grandes.
 
-* **1. Expansão dos Casos de Teste:**
-    * **Melhor Caso:** Adicionar testes com listas *já ordenadas* (para analisar o desempenho $O(n)$ do Insertion Sort e do Bubble Sort otimizado).
-    * **Quase Ordenadas:** Simular dados do "mundo real" que estão com poucos elementos (ex: 5-10%) fora de ordem.
-    * **Listas com Duplicatas:** Testar com arrays contendo muitos valores repetidos (ex: números de 1 a 10 numa lista de 50.000).
+3.  **Análise dos Resultados:**
+    * Após a execução, os arquivos `.npy` estarão disponíveis no diretório.
+    * Um segundo notebook (ou script) pode ser usado para carregar esses arquivos `.npy` e plotar os gráficos de **Tempo x Tamanho** usando `matplotlib`.
 
-* **2. Métricas Além do Tempo:**
-    * Implementar a contagem de **operações de comparação** (quantas vezes dois elementos são comparados).
-    * Implementar a contagem de **operações de troca (swaps)**.
-    * Analisar a **complexidade de espaço** (memória), comparando algoritmos *in-place* $O(1)$ com os que exigem memória auxiliar $O(n)$, como o Merge Sort.
+## 📈 Análises Planejadas e Próximos Passos
 
-* **4. Análise de Pivô (Quicksort):**
-    * Investigar e comparar o impacto de diferentes estratégias de escolha de pivô (ex: primeiro elemento vs. aleatório vs. mediana de três) no desempenho do Quicksort, especialmente no "pior caso".
+Para incrementar a análise e torná-la mais robusta, as seguintes melhorias estão planejadas:
 
-* **5. Novos Algoritmos (Não-Comparativos):**
-    * Adicionar algoritmos como **Counting Sort** e **Radix Sort** para analisar seu desempenho $O(n)$ em cenários específicos (ordenação de inteiros).
+* [ ] **Refinamento da Geração de Dados:**
+    * Alterar a geração de dados aleatórios para usar `np.random.permutation(N)` para garantir "números não repetidos", conforme o requisito original.
+    * Comparar o desempenho atual (com repetições) versus o desempenho (sem repetições).
 
-* **6. Visualizações Avançadas:**
-    * Utilizar **escalas logarítmicas** nos gráficos para melhor comparar visualmente algoritmos de complexidades muito diferentes.
+* [ ] **Robustez Estatística:**
+    * Aumentar o número de execuções de 3 para 10 (ou mais) para calcular uma média de tempo mais estável e confiável.
+
+* [ ] **Inclusão de Novos Cenários de Teste:**
+    * **Melhor Caso (Best Case):** Medir o tempo de execução para um array *já ordenado*.
+    * **Quase Ordenado:** Medir o tempo para um array 95% ordenado, simulando um cenário de dados do mundo real.
+
+* [ ] **Métricas Adicionais (Além do Tempo):**
+    * **Complexidade de Espaço:** Analisar e medir o pico de uso de memória (ex: usando `tracemalloc`) para classificar os algoritmos como *in-place* ($O(1)$) ou que requerem espaço auxiliar ($O(n)$ ou $O(\log n)$).
+    * **Estabilidade:** Classificar teoricamente cada implementação como *estável* ou *instável*.
+
+* [ ] **Otimização do Shell Sort:**
+    * Analisar o impacto da sequência de `gap` (atualmente `n // 2`).
+    * Implementar e comparar o desempenho com outras sequências de `gap` (ex: Knuth, Ciura) para otimizar o algoritmo.
