@@ -12,7 +12,7 @@ Atualmente, a análise compara os seguintes algoritmos implementados "do zero" (
 * Selection Sort
 * Insertion Sort
 * Shell Sort
-* Quick Sort (com estratégia de pivô [especificar a sua, ex: último elemento])
+* Quick Sort (com estratégia de pivô próximo ou exatamente na metade do array)
 * Merge Sort
 
 ## 📈 Análise Realizada (Fase 1)
@@ -37,7 +37,7 @@ Os resultados da Fase 1 foram consolidados em gráficos de **Tempo (s) vs. Taman
 Esses gráficos comparam visualmente o desempenho do **caso médio aleatório** contra o **pior caso invertido** para cada um dos algoritmos implementados, destacando a diferença de complexidade ($O(n^2)$ vs. $O(n \log n)$) na prática.
 
 ## 🛠️ Tecnologias Utilizadas
-* **Python 3.x**
+* **Python 3.12.7**
 * **Matplotlib** (para a plotagem dos gráficos)
 * **NumPy** (para geração eficiente de arrays)
 * **Módulo `timeit`** (para medição precisa do tempo de execução)
@@ -55,9 +55,6 @@ Para tornar a análise ainda mais robusta e completa, os próximos passos do pro
     * Implementar a contagem de **operações de comparação** (quantas vezes dois elementos são comparados).
     * Implementar a contagem de **operações de troca (swaps)**.
     * Analisar a **complexidade de espaço** (memória), comparando algoritmos *in-place* ($O(1)$) com os que exigem memória auxiliar ($O(n)$), como o Merge Sort.
-
-* **3. Benchmark de Comparação:**
-    * Incluir o método nativo do Python, **`list.sort()` (Timsort)**, em todas as análises para usá-lo como *baseline* de desempenho otimizado.
 
 * **4. Análise de Pivô (Quicksort):**
     * Investigar e comparar o impacto de diferentes estratégias de escolha de pivô (ex: primeiro elemento vs. aleatório vs. mediana de três) no desempenho do Quicksort, especialmente no "pior caso".
