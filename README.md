@@ -50,14 +50,14 @@ O gráfico "Comparação dos Casos Médios", que usa uma escala Y logarítmica, 
 
 Este algoritmo apresentou o desempenho mais contrastante:
 
-* **Caso Médio ($O(n \log n)$):** Foi o algoritmo **mais rápido** de todos no caso médio. Com dados aleatórios, a estratégia de pivô (`lista[n-1]`) funciona bem, dividindo o array eficientemente.
-* **Pior Caso ($O(n^2)$):** A estratégia de pivô "último elemento" é ingênua e vulnerável. Como visto no gráfico "Tamanho x Tempo (Quick Sort)", o pior caso (linha vermelha) ocorre quando o array está ordenado (ou inversamente ordenado), forçando o algoritmo a partições desbalanceadas ($n-1$ e $0$) e degradando o desempenho para quadrático.
+* **Caso Médio $ O(n \log (n)) $:** Foi o algoritmo **mais rápido** de todos no caso médio. Com dados aleatórios, a estratégia de pivô (`lista[n-1]`) funciona bem, dividindo o array eficientemente.
+* **Pior Caso $ O(n^2) $:** A estratégia de pivô "último elemento" é ingênua e vulnerável. Como visto no gráfico "Tamanho x Tempo (Quick Sort)", o pior caso (linha vermelha) ocorre quando o array está ordenado (ou inversamente ordenado), forçando o algoritmo a partições desbalanceadas ($n-1$ e $0$) e degradando o desempenho para quadrático.
 
 ### 3. A Consistência do Merge Sort
 
 O `Merge Sort` provou ser o algoritmo mais estável e previsível.
 
-* **Todos os Casos $O(n \log n)$:** Seu desempenho é $O(n \log (n))$ em todos os cenários. O gráfico "Tamanho x Tempo (Merge Sort)" confirma isso, mostrando as linhas de caso médio e pior caso quase sobrepostas.
+* **Todos os Casos $ O(n \log (n)) $:** Seu desempenho é $O(n \log (n))$ em todos os cenários. O gráfico "Tamanho x Tempo (Merge Sort)" confirma isso, mostrando as linhas de caso médio e pior caso quase sobrepostas.
 * **Artefato de Pior Caso:** Uma observação interessante é que o "pior caso" (linha vermelha) foi consistentemente *mais rápido* que a média. Isso é provavelmente um artefato de otimização de hardware (CPU *Branch Prediction*), onde dados previsíveis (como um array ordenado) são processados de forma mais eficiente do que dados aleatórios e imprevisíveis.
 * **Custo de Espaço:** Conforme observado no `sort_benchmark.ipynb`, essa estabilidade de tempo tem um custo: o `Merge Sort` utiliza **$O(n)$ de espaço extra** na memória para criar cópias dos subarrays durante a mesclagem.
 
