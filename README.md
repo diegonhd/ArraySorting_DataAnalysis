@@ -43,7 +43,7 @@ A análise dos gráficos gerados revela o comportamento de complexidade de tempo
 
 O gráfico "Comparação dos Casos Médios", que usa uma escala Y logarítmica, mostra uma divisão nítida de desempenho:
 
-* **Grupo Lento ($O(n^2)$):** `Bubble Sort`, `Selection Sort` e `Insertion Sort`. Seus tempos de execução são ordens de magnitude maiores, crescendo exponencialmente.
+* **Grupo Lento $(O(n^2))$:** `Bubble Sort`, `Selection Sort` e `Insertion Sort`. Seus tempos de execução são ordens de magnitude maiores, crescendo exponencialmente.
 * **Grupo Rápido ($O(n \log n)$ ou sub-quadrático):** `Quick Sort`, `Merge Sort` e `Shell Sort`. Seus tempos são significativamente mais baixos e escalam muito melhor.
 
 ### 2. A Dicotomia do Quick Sort
