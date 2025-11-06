@@ -70,5 +70,5 @@ O gráfico "Comparação dos Piores Casos" (escala Y logarítmica) destaca a imp
 
 ## Como Executar
 
-1.  Execute todas as células no notebook `arrays.ipynb` para gerar os dados de benchmark. (Isso pode levar vários minutos, especialmente para os algoritmos $O(n^2)$).
+1.  Execute todas as células no notebook `arrays.ipynb` para gerar os dados de benchmark. (Isso pode levar vários minutos, especialmente para os algoritmos $O(n^2)$ ).
 2.  Após a conclusão, execute todas as células no notebook `sort_benchmark.ipynb` para analisar os dados e gerar todos os gráficos e arquivos CSV de resultados.
