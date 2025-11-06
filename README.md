@@ -1,80 +1,74 @@
-# 📊 Análise de Desempenho de Algoritmos de Ordenação
+# Projeto de Benchmark de Algoritmos de Ordenação
 
-Este projeto implementa e analisa o desempenho de seis algoritmos de ordenação clássicos em Python, utilizando as bibliotecas `numpy` e `time`. O objetivo principal é medir e comparar a complexidade de tempo (tempo de execução) de cada algoritmo à medida que o tamanho da entrada (N) aumenta.
+Este projeto realiza uma análise de desempenho e complexidade de seis algoritmos de ordenação comuns. Ele mede e compara os tempos de execução em arrays de tamanhos variados (de 1.000 a 50.000 elementos) para casos médios (dados aleatórios) e piores casos (dados inversamente ordenados).
 
-## 🚀 Algoritmos Analisados
+## Algoritmos Implementados
 
-O notebook `arrays.ipynb` contém implementações "do zero" dos seguintes algoritmos:
+Os seguintes algoritmos foram implementados e testados:
 
-* Bubble Sort
-* Selection Sort
-* Insertion Sort
-* Shell Sort
-* Quick Sort (recursivo)
-* Merge Sort (recursivo)
+* **Bubble Sort**
+* **Selection Sort**
+* **Insertion Sort**
+* **Shell Sort** (com estratégia de *gap* inicial = `n // 2`)
+* **Quick Sort** (com estratégia de pivô = último elemento, `lista[n-1]`)
+* **Merge Sort**
 
-## 🔬 Metodologia de Análise
+## Estrutura do Projeto
 
-A análise de desempenho é conduzida da seguinte forma:
+O projeto é dividido em dois notebooks Jupyter principais:
 
-1.  **Geração de Dados:** Para cada tamanho de array $N$, são gerados quatro conjuntos de dados:
-    * **3x Séries Aleatórias:** Arrays de números inteiros gerados aleatoriamente.
-    * **1x Pior Caso (Worst Case):** Um array com os mesmos elementos, mas ordenado em ordem decrescente (o pior caso para a maioria dos algoritmos de ordenação).
+1.  **`arrays.ipynb` (Geração de Dados):**
+    * Contém as implementações em Python (usando NumPy) de todos os seis algoritmos de ordenação.
+    * Define funções de *benchmark* (`tempo_ordenaçao_...`) para cronometrar o tempo de execução de cada algoritmo.
+    * Gera os conjuntos de dados de teste:
+        * **Tamanhos:** 1k, 10k, 20k, 30k, 40k e 50k elementos.
+        * **Casos Médios:** 3 arrays com dados aleatórios para cada tamanho.
+        * **Pior Caso:** 1 array inversamente ordenado para cada tamanho.
+    * Salva os dados de tempo de execução em arquivos `.npy` (ex: `list_bs.npy`, `list_qs.npy`, etc.) para análise posterior.
 
-2.  **Tamanhos de Entrada (N):**
-    * 1.000 (1k)
-    * 10.000 (10k)
-    * 20.000 (20k)
-    * 30.000 (30k)
-    * 40.000 (40k)
-    * 50.000 (50k)
+2.  **`sort_benchmark.ipynb` (Análise e Visualização):**
+    * Carrega os arquivos `.npy` gerados pelo `arrays.ipynb`.
+    * Processa os dados brutos e os organiza em DataFrames do Pandas.
+    * Cria dois DataFrames principais para comparação:
+        * `df_medias`: Contém a média dos tempos de execução dos arrays aleatórios.
+        * `df_piores_casos`: Contém os tempos de execução dos arrays de pior caso.
+    * Salva esses DataFrames de resumo em `resultados_medias.csv` e `resultados_piores_casos.csv`.
+    * Utiliza Matplotlib para gerar os gráficos de desempenho, tanto individualmente para cada algoritmo quanto em comparações (Casos Médios e Piores Casos) com escala logarítmica.
 
-3.  **Coleta de Métricas:**
-    * O tempo de execução de cada algoritmo é medido para cada uma das quatro séries.
-    * A **Média de Tempo** é calculada a partir das três execuções com séries aleatórias.
-    * O **Tempo do Pior Caso** é registrado separadamente.
+## Análise e Principais Conclusões
 
-4.  **Armazenamento:**
-    * Todos os tempos e médias são salvos em arquivos `.npy` (ex: `mean_arr_bs.npy`, `list_qs.npy`) para análise posterior e plotagem de gráficos.
+A análise dos gráficos gerados revela o comportamento de complexidade de tempo de cada algoritmo na prática.
 
-## ⚙️ Como Executar o Projeto
+### 1. Divisão Clara: $O(n^2)$ vs. $O(n \log n)$
 
-1.  **Pré-requisitos:**
-    * Python 3.x
-    * Jupyter Notebook ou Jupyter Lab
-    * Bibliotecas: `numpy`, `matplotlib`, `time` (a última é nativa do Python).
+O gráfico "Comparação dos Casos Médios", que usa uma escala Y logarítmica, mostra uma divisão nítida de desempenho:
 
-    ```bash
-    pip install numpy matplotlib jupyter
-    ```
+* **Grupo Lento ($O(n^2)$):** `Bubble Sort`, `Selection Sort` e `Insertion Sort`. Seus tempos de execução são ordens de magnitude maiores, crescendo exponencialmente.
+* **Grupo Rápido ($O(n \log n)$ ou sub-quadrático):** `Quick Sort`, `Merge Sort` e `Shell Sort`. Seus tempos são significativamente mais baixos e escalam muito melhor.
 
-2.  **Executando os Testes:**
-    * Abra o notebook `arrays.ipynb` no Jupyter.
-    * Execute todas as células sequencialmente. Isso pode levar um tempo considerável, especialmente para os algoritmos $O(n^2)$ (Bubble, Selection, Insertion) em tamanhos de array grandes.
+### 2. A Dicotomia do Quick Sort
 
-3.  **Análise dos Resultados:**
-    * Após a execução, os arquivos `.npy` estarão disponíveis no diretório.
-    * Um segundo notebook (ou script) pode ser usado para carregar esses arquivos `.npy` e plotar os gráficos de **Tempo x Tamanho** usando `matplotlib`.
+Este algoritmo apresentou o desempenho mais contrastante:
 
-## 📈 Análises Planejadas e Próximos Passos
+* **Caso Médio ($O(n \log n)$):** Foi o algoritmo **mais rápido** de todos no caso médio. Com dados aleatórios, a estratégia de pivô (`lista[n-1]`) funciona bem, dividindo o array eficientemente.
+* **Pior Caso ($O(n^2)$):** A estratégia de pivô "último elemento" é ingênua e vulnerável. Como visto no gráfico "Tamanho x Tempo (Quick Sort)", o pior caso (linha vermelha) ocorre quando o array está ordenado (ou inversamente ordenado), forçando o algoritmo a partições desbalanceadas ($n-1$ e $0$) e degradando o desempenho para quadrático.
 
-Para incrementar a análise e torná-la mais robusta, as seguintes melhorias estão planejadas:
+### 3. A Consistência do Merge Sort
 
-* [ ] **Refinamento da Geração de Dados:**
-    * Alterar a geração de dados aleatórios para usar `np.random.permutation(N)` para garantir "números não repetidos", conforme o requisito original.
-    * Comparar o desempenho atual (com repetições) versus o desempenho (sem repetições).
+O `Merge Sort` provou ser o algoritmo mais estável e previsível.
 
-* [ ] **Robustez Estatística:**
-    * Aumentar o número de execuções de 3 para 10 (ou mais) para calcular uma média de tempo mais estável e confiável.
+* **Todos os Casos ($O(n \log n)$):** Seu desempenho é $O(n \log n)$ em todos os cenários. O gráfico "Tamanho x Tempo (Merge Sort)" confirma isso, mostrando as linhas de caso médio e pior caso quase sobrepostas.
+* **Artefato de Pior Caso:** Uma observação interessante é que o "pior caso" (linha vermelha) foi consistentemente *mais rápido* que a média. Isso é provavelmente um artefato de otimização de hardware (CPU *Branch Prediction*), onde dados previsíveis (como um array ordenado) são processados de forma mais eficiente do que dados aleatórios e imprevisíveis.
+* **Custo de Espaço:** Conforme observado no `sort_benchmark.ipynb`, essa estabilidade de tempo tem um custo: o `Merge Sort` utiliza **$O(n)$ de espaço extra** na memória para criar cópias dos subarrays durante a mesclagem.
 
-* [ ] **Inclusão de Novos Cenários de Teste:**
-    * **Melhor Caso (Best Case):** Medir o tempo de execução para um array *já ordenado*.
-    * **Quase Ordenado:** Medir o tempo para um array 95% ordenado, simulando um cenário de dados do mundo real.
+### 4. Comparação Final: Piores Casos
 
-* [ ] **Métricas Adicionais (Além do Tempo):**
-    * **Complexidade de Espaço:** Analisar e medir o pico de uso de memória (ex: usando `tracemalloc`) para classificar os algoritmos como *in-place* ($O(1)$) ou que requerem espaço auxiliar ($O(n)$ ou $O(\log n)$).
-    * **Estabilidade:** Classificar teoricamente cada implementação como *estável* ou *instável*.
+O gráfico "Comparação dos Piores Casos" (escala Y logarítmica) destaca a importância de escolher o algoritmo certo para dados não confiáveis:
 
-* [ ] **Otimização do Shell Sort:**
-    * Analisar o impacto da sequência de `gap` (atualmente `n // 2`).
-    * Implementar e comparar o desempenho com outras sequências de `gap` (ex: Knuth, Ciura) para otimizar o algoritmo.
+* O **Quick Sort** (linha roxa) "salta" do grupo rápido para o grupo lento, confirmando sua degradação para $O(n^2)$.
+* O **Merge Sort** (linha marrom) e o **Shell Sort** (linha vermelha) permanecem na base, provando sua robustez e desempenho superior mesmo no pior cenário testado.
+
+## Como Executar
+
+1.  Execute todas as células no notebook `arrays.ipynb` para gerar os dados de benchmark. (Isso pode levar vários minutos, especialmente para os algoritmos $O(n^2)$).
+2.  Após a conclusão, execute todas as células no notebook `sort_benchmark.ipynb` para analisar os dados e gerar todos os gráficos e arquivos CSV de resultados.
