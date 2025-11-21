@@ -4,7 +4,22 @@ Análise de Desempenho e Complexidade de Algoritmos Clássicos em Python (1k a 5
 
 Este projeto de Análise de Algoritmos implementa 10 algoritmos de ordenação em Python para realizar um benchmark completo, medindo e comparando a performance em diferentes escalas (até 50.000 elementos) e cenários (aleatório e pior caso). O objetivo é validar empiricamente as complexidades temporais teóricas ($O(n^2)$, $O(n \log n)$, $O(n+k)$).
 
-🎯 Algoritmos Analisados
+💻 Como Executar
+
+Para rodar este benchmark, você precisará do Python 3 e das bibliotecas listadas abaixo.
+
+Instalação de Dependências:
+
+pip install numpy pandas matplotlib
+
+
+Geração de Dados: Execute todas as células no notebook arrays.ipynb.
+
+Atenção: Esta etapa pode levar alguns minutos, especialmente para os algoritmos de complexidade quadrática ($O(n^2)$).
+
+Análise e Visualização: Após a conclusão, execute todas as células no notebook sort_benchmark.ipynb para processar os dados e gerar os gráficos.
+
+🎯 Algoritmos Implementados e Analisados
 
 O projeto cobre as principais classes de complexidade assintótica, oferecendo uma visão holística sobre a eficiência em ordenação:
 
@@ -12,31 +27,31 @@ Classe de Complexidade
 
 Algoritmos Implementados
 
-Complexidade (Pior Caso)
+Implementação Notável
 
 Quadrática
 
 Bubble Sort, Selection Sort, Insertion Sort
 
-$O(n^2)$
+Implementação simples e direta.
 
 Log-Linear
 
 Quick Sort, Merge Sort, Heap Sort
 
-$O(n^2)$ / $O(n \log n)$
+Quick Sort com pivô no último elemento (lista[n-1]).
 
 Linear (Counting)
 
 Counting Sort, Radix Sort, Bucket Sort
 
-$O(n+k)$
+Ideal para dados com range (k) limitado.
 
 Intermediário
 
-Shell Sort (Estratégia n // 2)
+Shell Sort
 
-Pior Caso é complexo, mas sub-quadrático na prática.
+Estratégia de gap inicial = n // 2.
 
 📈 Análise e Principais Conclusões
 
@@ -44,7 +59,7 @@ A análise quantitativa, ilustrada por gráficos de desempenho com escala logar�
 
 1. O Ponto de Ruptura: Complexidade Quadrática ($O(n^2)$)
 
-Os algoritmos de complexidade quadrática (Bubble Sort, Selection Sort e Insertion Sort) demonstraram o pior desempenho, com tempos de execução na escala de 10² segundos para $N=50k$. O crescimento de suas curvas é exponencial no gráfico logarítmico, confirmando a inviabilidade para grandes volumes de dados.
+Os algoritmos de complexidade quadrática (Bubble Sort, Selection Sort e Insertion Sort) demonstraram o pior desempenho, com tempos de execução na escala de $10^2$ segundos para $N=50k$. O crescimento de suas curvas é exponencial no gráfico logarítmico, confirmando a inviabilidade para grandes volumes de dados.
 
 2. Robustez Log-Linear ($O(n \log n)$)
 
@@ -52,7 +67,7 @@ Merge Sort (Estabilidade Garantida): Este algoritmo provou ser o mais estável e
 
 Heap Sort (Estabilidade Teórica): Assim como o Merge Sort, o Heap Sort garante uma performance $O(n \log n)$ no pior caso. Suas curvas escalam de forma eficiente, comprovando sua robustez em situações de dados imprevisíveis.
 
-Shell Sort (Intermediário Prático): Embora sua complexidade teórica (com a sequência n // 2) tenda a $O(n^2)$, o desempenho prático foi significativamente superior aos demais $O(n^2)$ e próximo aos $O(n \log n)$ para a escala testada, operando em uma escala de tempo 10³ vezes menor que o Bubble Sort.
+Shell Sort (Intermediário Prático): Embora sua complexidade teórica (com a sequência n // 2) tenda a $O(n^2)$, o desempenho prático foi significativamente superior aos demais $O(n^2)$ e próximo aos $O(n \log n)$ para a escala testada.
 
 3. A Dicotomia do Quick Sort
 
@@ -64,25 +79,31 @@ Pior Caso (Vulnerável): A utilização ingênua do último elemento como pivô 
 
 Counting Sort e Radix Sort: Estes algoritmos não-comparativos foram, de longe, os mais rápidos no benchmark. Suas curvas são praticamente horizontais (crescimento $O(n)$), pois o overhead é dominado pelo tamanho da lista ($N$) e não pela complexidade logarítmica. Este resultado demonstra a extrema eficiência desses métodos para problemas com um range de valores (k) fixo e pequeno.
 
-⚙️ Estrutura do Projeto
+📂 Estrutura do Projeto
 
-O benchmark foi estruturado em dois notebooks principais para um fluxo de trabalho claro (Execução ➡️ Análise):
+Arquivo/Item
 
-arrays.ipynb (Implementação e Geração de Dados):
+Função
 
-Contém todas as implementações nativas em Python (com suporte NumPy).
+Resultados Gerados
 
-Executa os testes de benchmark em 6 tamanhos de array e 4 cenários (3 aleatórios, 1 pior caso).
+arrays.ipynb
 
-Salva os tempos de execução em arquivos .npy para persistência.
+Implementação dos 10 algoritmos e execução dos testes de tempo (benchmarking).
 
-sort_benchmark.ipynb (Processamento e Visualização):
+Arquivos binários .npy (ex: list_bs.npy) contendo todos os dados de tempo brutos.
 
-Carrega e processa os dados de tempo usando a biblioteca Pandas.
+sort_benchmark.ipynb
 
-Gera os DataFrames resumidos (resultados_medias.csv e resultados_piores_casos.csv).
+Processamento de dados brutos e organização em DataFrames. Criação de todas as visualizações (gráficos logarítmicos).
 
-Utiliza Matplotlib para gerar todos os gráficos comparativos, incluindo o uso estratégico de escala logarítmica para melhor visualizar a diferença assintótica das classes de complexidade.
+Arquivos CSV (resultados_medias.csv e resultados_piores_casos.csv) com os tempos resumidos.
+
+Gráficos (Matplotlib)
+
+Ilustração visual da escalabilidade e complexidade de cada algoritmo.
+
+Imagens de comparação de Caso Médio e Pior Caso (escala logarítmica).
 
 🛠️ Habilidades Demonstradas
 
