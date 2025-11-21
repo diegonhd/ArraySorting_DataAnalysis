@@ -1,99 +1,118 @@
-Aqui está uma versão atualizada e aprimorada do seu `README.md`, adaptada para um portfólio.
+Com base nas imagens que você enviou, a estrutura do repositório mudou ligeiramente. O notebook de geração de dados e os arquivos `.npy` estão dentro de uma pasta chamada `array archive`, enquanto o notebook de análise (`sort_benchmark.ipynb`) e os CSVs de resultados estão na raiz.
 
-As principais mudanças foram:
-1.  **Inclusão dos novos algoritmos** encontrados no seu notebook (`Heap Sort`, `Bucket Sort`, `Counting Sort`, `Radix Sort`).
-2.  **Categorização técnica** dos algoritmos por complexidade para demonstrar domínio teórico.
-3.  **Atualização das conclusões** para refletir os dados dos algoritmos lineares (que são muito mais rápidos).
-4.  **Melhoria na formatação** e linguagem para um tom mais profissional.
+Aqui está o **README.md** atualizado, profissional e adaptado para essa estrutura de arquivos, ideal para seu portfólio:
 
----
+-----
 
-# 📊 Benchmark e Análise de Algoritmos de Ordenação
+# 📊 Benchmark e Análise de Complexidade de Algoritmos
 
-Este projeto consiste em um estudo prático de **Estrutura de Dados e Algoritmos**, focado na análise de desempenho e complexidade assintótica de **10 algoritmos de ordenação** (Sorting Algorithms).
+Este projeto consiste em um estudo prático e comparativo de **Estrutura de Dados e Algoritmos**, focado na análise de desempenho de **10 algoritmos de ordenação** (Sorting Algorithms).
 
-O objetivo é comparar a eficiência teórica ($Big-O$) com o tempo de execução real em Python, utilizando grandes volumes de dados e diferentes cenários de ordenação.
+O objetivo é confrontar a teoria da complexidade assintótica ($Big-O$) com o tempo de execução real em Python, utilizando grandes volumes de dados e diferentes cenários de ordenação (casos médios aleatórios e piores casos inversamente ordenados).
+
+-----
+
+## 🚀 Como Executar este Projeto
+
+Para reproduzir as análises e gráficos em sua máquina local, siga os passos abaixo:
+
+### 1\. Pré-requisitos
+
+Certifique-se de ter o **Python 3.x** instalado e um ambiente para rodar Jupyter Notebooks (VS Code, Jupyter Lab ou Anaconda).
+
+### 2\. Instalação das Dependências
+
+Abra seu terminal e instale as bibliotecas necessárias:
+
+```bash
+pip install numpy pandas matplotlib notebook
+```
+
+### 3\. Executando os Arquivos
+
+A execução é dividida em duas etapas: geração de dados e visualização.
+
+1.  **Clone ou baixe o repositório.**
+2.  **Geração dos Dados:**
+      * Acesse a pasta `array archive`.
+      * Execute o notebook **`arrays.ipynb`**.
+      * *O que ele faz:* Implementa os algoritmos, executa os testes de estresse e salva os tempos brutos em arquivos `.npy` dentro desta mesma pasta.
+3.  **Análise e Gráficos:**
+      * Volte para a raiz do repositório.
+      * Execute o notebook **`sort_benchmark.ipynb`**.
+      * *O que ele faz:* Lê os arquivos `.npy` gerados anteriormente, compila os dados em DataFrames e plota os gráficos comparativos finais.
+
+-----
 
 ## 🛠️ Tecnologias Utilizadas
-* **Linguagem:** Python 3
-* **Manipulação de Dados:** NumPy, Pandas
-* **Visualização:** Matplotlib
-* **Ambiente:** Jupyter Notebook
 
----
+  * **Linguagem:** Python 3.12+
+  * **Processamento Numérico:** NumPy
+  * **Análise de Dados:** Pandas
+  * **Visualização de Dados:** Matplotlib
+  * **Ambiente de Desenvolvimento:** Jupyter Notebook
 
-## 🚀 Algoritmos Implementados e Testados
+-----
 
-O estudo cobre três categorias principais de algoritmos de ordenação, permitindo uma comparação rica entre diferentes abordagens:
+## 🧠 Algoritmos Implementados
 
-### 1. Algoritmos Quadráticos - $O(n^2)$
-* **Bubble Sort**
-* **Selection Sort**
-* **Insertion Sort**
-* **Shell Sort** (Otimizado com estratégia de *gap*, mas comparado neste grupo)
+O estudo cobre três categorias de complexidade, permitindo visualizar o "salto" de performance entre diferentes abordagens lógicas.
 
-### 2. Algoritmos Log-Lineares - $O(n \log n)$
-* **Quick Sort** (Estratégia de pivô: último elemento)
-* **Merge Sort** (Abordagem *Divide and Conquer*)
-* **Heap Sort** (Baseado em estrutura de Heap Binária)
+### 1\. Algoritmos Quadráticos — $O(n^2)$
 
-### 3. Algoritmos Lineares / Distribuição - $O(n+k)$
-* **Bucket Sort**
-* **Counting Sort**
-* **Radix Sort**
+  * **Bubble Sort**
+  * **Selection Sort**
+  * **Insertion Sort**
+  * **Shell Sort** (Otimizado com estratégia de *gap*, mas agrupado aqui pela performance em pequenos conjuntos).
 
----
+### 2\. Algoritmos Log-Lineares — $O(n \log n)$
 
-## 📂 Estrutura do Projeto
+  * **Quick Sort** (Estratégia de pivô: último elemento).
+  * **Merge Sort** (Divisão e Conquista).
+  * **Heap Sort** (Estrutura de Heap Binária).
 
-A pipeline de execução foi dividida para garantir a integridade dos dados e facilitar a reprodução dos testes:
+### 3\. Algoritmos Lineares / Distribuição — $O(n+k)$
 
-### 1. Geração e Processamento (`arrays.ipynb`)
-* Implementação manual de todos os 10 algoritmos (sem uso de `.sort()` nativo para fins educativos).
-* Funções de *benchmark* para cronometragem precisa.
-* **Cenários de Teste:**
-    * **Tamanhos de Input:** 1.000, 10.000, 20.000, 30.000, 40.000 e 50.000 elementos.
-    * **Caso Médio:** Média de 3 execuções com arrays de inteiros aleatórios.
-    * **Pior Caso:** Execução com array inversamente ordenado (decrescente).
-* Persistência dos dados brutos em arquivos binários `.npy`.
+  * **Bucket Sort**
+  * **Counting Sort**
+  * **Radix Sort**
 
-### 2. Análise e Visualização (`sort_benchmark.ipynb`)
-* Processamento dos arquivos `.npy` e estruturação em **Pandas DataFrames**.
-* Exportação dos resultados consolidados:
-    * `resultados_medias.csv`: Desempenho em dados aleatórios.
-    * `resultados_piores_casos.csv`: Desempenho em cenários de estresse.
-* Geração de gráficos comparativos com escala logarítmica para visualização de ordens de grandeza.
+-----
 
----
+## 📂 Estrutura do Repositório
 
-## 📈 Análise de Resultados e Insights
+```text
+├── array archive/              # Módulo de Processamento e Dados Brutos
+│   ├── arrays.ipynb            # Implementação dos algoritmos e script de teste
+│   ├── list_*.npy              # Arquivos binários com os tempos de execução salvos
+│   └── ...
+├── resultados_medias.csv       # Tabela consolidada dos testes de Caso Médio
+├── resultados_piores_casos.csv # Tabela consolidada dos testes de Pior Caso
+├── sort_benchmark.ipynb        # Notebook de Visualização, Gráficos e Conclusões
+├── .gitignore
+└── README.md
+```
 
-A visualização dos dados permitiu extrair conclusões valiosas sobre o comportamento dos algoritmos:
+-----
 
-### 1. O Abismo de Desempenho
-O gráfico comparativo (escala logarítmica) evidencia três camadas distintas de performance:
-* **Lentos:** Bubble, Selection e Insertion Sort sofrem exponencialmente com o aumento de $N$. Para 50k elementos, o tempo é proibitivo.
-* **Eficientes:** Merge, Heap e Quick Sort mantêm tempos baixos e escalam suavemente.
-* **Instantâneos:** Counting, Radix e Bucket Sort rodam quase instantaneamente, provando a superioridade de algoritmos não baseados em comparação para dados inteiros.
+## 📈 Principais Insights e Resultados
 
-### 2. A Instabilidade do Quick Sort
-Apesar de ser o mais rápido dos algoritmos baseados em comparação no **Caso Médio** ($O(n \log n)$), o Quick Sort apresentou uma falha crítica no **Pior Caso**.
-* Devido à escolha ingênua do pivô (último elemento), ao ordenar uma lista já inversa, o algoritmo degradou para $O(n^2)$, comportando-se de forma similar ao Bubble Sort no gráfico de piores casos.
+A análise visual dos dados (disponível em `sort_benchmark.ipynb`) revelou conclusões importantes:
 
-### 3. Robustez do Merge Sort e Heap Sort
-Ambos demonstraram consistência absoluta. As curvas de tempo para dados aleatórios e dados inversos foram praticamente idênticas, confirmando a garantia de $O(n \log n)$ independente da disposição inicial dos dados.
-* *Nota:* O Merge Sort consumiu mais memória ($O(n)$) devido à criação de arrays auxiliares durante a recursão.
+### 1\. O Abismo de Desempenho
 
-### 4. A Superioridade dos Algoritmos Lineares
-Os algoritmos de distribuição (**Counting, Radix, Bucket**) superaram todos os outros por ordens de magnitude. O gráfico de "Caso Médio" mostra suas linhas praticamente coladas ao eixo X (tempo próximo de zero), validando a complexidade $O(n+k)$ para o tipo de dado testado (inteiros).
+Em escala logarítmica, a diferença entre as classes de algoritmos é brutal. Enquanto o **Bubble Sort** leva mais de 700 segundos para ordenar 50k elementos no pior caso, algoritmos como **Radix Sort** realizam a mesma tarefa em frações de segundo (0.09s).
 
----
+### 2\. A Instabilidade do Quick Sort
 
-## ⚙️ Como Executar
+Apesar de ser extremamente rápido no **Caso Médio** (dados aleatórios), o Quick Sort com pivô fixo degradou para uma performance quadrática $O(n^2)$ no **Pior Caso** (lista invertida), comportando-se de maneira semelhante aos algoritmos mais lentos.
 
-Para reproduzir este estudo em sua máquina:
+### 3\. Robustez do Merge e Heap Sort
 
-1.  **Pré-requisitos:** Certifique-se de ter Python instalado com as bibliotecas: `numpy`, `pandas`, `matplotlib`.
-2.  **Gerar Dados:** Execute todas as células do notebook `arrays.ipynb`.
-    * *Aviso:* Esta etapa pode levar vários minutos devido à execução dos algoritmos quadráticos ($O(n^2)$) em arrays grandes.
-3.  **Visualizar Resultados:** Execute o notebook `sort_benchmark.ipynb`. Ele lerá os dados gerados e plotará os gráficos comparativos.
+Estes algoritmos demonstraram consistência absoluta. As curvas de tempo para dados aleatórios e dados invertidos foram praticamente idênticas, confirmando a estabilidade de $O(n \log n)$ independente da desordem da entrada.
+
+### 4\. A Supremacia dos Algoritmos Lineares
+
+Os algoritmos de distribuição (**Counting, Radix, Bucket**) superaram todos os outros. O gráfico de "Caso Médio" mostra suas linhas praticamente coladas ao eixo X (tempo próximo de zero), validando a complexidade $O(n+k)$ para ordenação de inteiros.
+
+-----
