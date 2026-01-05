@@ -1,9 +1,3 @@
-Com base nas imagens que você enviou, a estrutura do repositório mudou ligeiramente. O notebook de geração de dados e os arquivos `.npy` estão dentro de uma pasta chamada `array archive`, enquanto o notebook de análise (`sort_benchmark.ipynb`) e os CSVs de resultados estão na raiz.
-
-Aqui está o **README.md** atualizado, profissional e adaptado para essa estrutura de arquivos, ideal para seu portfólio:
-
------
-
 # 📊 Benchmark e Análise de Complexidade de Algoritmos
 
 Este projeto consiste em um estudo prático e comparativo de **Estrutura de Dados e Algoritmos**, focado na análise de desempenho de **10 algoritmos de ordenação** (Sorting Algorithms).
