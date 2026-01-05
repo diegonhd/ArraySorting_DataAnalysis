@@ -38,7 +38,7 @@ A execução é dividida em duas etapas: geração de dados e visualização.
 
 -----
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
   * **Linguagem:** Python 3.12+
   * **Processamento Numérico:** NumPy
