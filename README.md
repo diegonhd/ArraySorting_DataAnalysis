@@ -1,4 +1,4 @@
-# 📊 Benchmark e Análise de Complexidade de Algoritmos
+# Benchmark e Análise de Complexidade de Algoritmos
 
 Este projeto consiste em um estudo prático e comparativo de **Estrutura de Dados e Algoritmos**, focado na análise de desempenho de **10 algoritmos de ordenação** (Sorting Algorithms).
 
@@ -6,7 +6,7 @@ O objetivo é confrontar a teoria da complexidade assintótica ($Big-O$) com o t
 
 -----
 
-## 🚀 Como Executar este Projeto
+##  Como Executar este Projeto
 
 Para reproduzir as análises e gráficos em sua máquina local, siga os passos abaixo:
 
@@ -48,7 +48,7 @@ A execução é dividida em duas etapas: geração de dados e visualização.
 
 -----
 
-## 🧠 Algoritmos Implementados
+##  Algoritmos Implementados
 
 O estudo cobre três categorias de complexidade, permitindo visualizar o "salto" de performance entre diferentes abordagens lógicas.
 
@@ -73,7 +73,7 @@ O estudo cobre três categorias de complexidade, permitindo visualizar o "salto"
 
 -----
 
-## 📂 Estrutura do Repositório
+##  Estrutura do Repositório
 
 ```text
 ├── array archive/              # Módulo de Processamento e Dados Brutos
@@ -89,7 +89,7 @@ O estudo cobre três categorias de complexidade, permitindo visualizar o "salto"
 
 -----
 
-## 📈 Principais Insights e Resultados
+## Principais Insights e Resultados
 
 A análise visual dos dados (disponível em `sort_benchmark.ipynb`) revelou conclusões importantes:
 
